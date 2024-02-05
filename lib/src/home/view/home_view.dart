@@ -31,43 +31,42 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            homeController.userList.value.isEmpty
-                ? const Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Expanded(
-                    child: ListView.builder(
-                      itemCount: homeController.userList.value.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: const FlutterLogo(),
-                          title:
-                              Text('${homeController.userList[index].title}'),
-                          subtitle:
-                              Text('${homeController.userList[index].name}'),
-                          trailing: InkWell(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return DeleteUserDialog(
-                                    username: homeController
-                                        .userList[index].name
-                                        .toString(), // Pass the username you want to delete
-                                    onPressed: () {
-                                      homeController.deleteUser();
-                                      Navigator.of(context).pop();
-                                    },
-                                  );
+            if (homeController.userList.value.isEmpty)
+              const Center(
+                child: CircularProgressIndicator(),
+              )
+            else
+              Expanded(
+                child: ListView.builder(
+                  itemCount: homeController.userList.value.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: const FlutterLogo(),
+                      title: Text('${homeController.userList[index].title}'),
+                      subtitle: Text('${homeController.userList[index].name}'),
+                      trailing: InkWell(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return DeleteUserDialog(
+                                username: homeController.userList[index].title
+                                    .toString(), // Pass the username you want to delete
+                                onPressed: () async {
+                                  await homeController.deleteUser(
+                                      userId: homeController.list[index]);
+                                  Navigator.of(context).pop();
                                 },
                               );
                             },
-                            child: const Icon(Icons.more_vert),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                          );
+                        },
+                        child: const Icon(Icons.more_vert),
+                      ),
+                    );
+                  },
+                ),
+              ),
           ],
         );
       }),

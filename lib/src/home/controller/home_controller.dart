@@ -11,37 +11,58 @@ class HomeController extends GetxController {
   TextEditingController nameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   RxList<UserModel> userList = <UserModel>[].obs;
+  RxList<String> list = <String>[].obs;
 
   Future<void> addUser() {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return users.add({
-      'title': titleController.text, // John Doe
-      'name': nameController.text, // Stokes and Sons
-      'description': descriptionController.text, // 42
+      'title': titleController.text,
+      'name': nameController.text,
+      'description': descriptionController.text,
     }).then(
       (value) {
         log("User Added", name: "Added");
+        titleController.clear();
+        nameController.clear();
+        descriptionController.clear();
         fetchUsers();
       },
     ).catchError(
-      (error) => log("Failed to add user: $error", name: "Failed"),
+      (error) {
+        log("Failed to add user: $error", name: "FailedAdd");
+      },
     );
   }
 
   Future<void> fetchUsers() {
     userList.clear();
+    list.clear();
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return users.get().then((QuerySnapshot snapshot) {
       for (var doc in snapshot.docs) {
+        list.add(doc.id);
         userList.add(
           UserModel.fromJson(doc.data()),
         );
       }
     }).catchError(
-      (error) =>
-          log("Failed to fetch users: ${error}", name: "Failed fetch users"),
+      (error) {
+        log("Failed to fetch users: $error", name: "FetchUsers");
+      },
     );
   }
 
-  deleteUser() {}
+  Future<void> deleteUser({required String userId}) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return users.doc(userId).delete().then(
+      (value) {
+        log("User deleted successfully!", name: "Deleted");
+        fetchUsers();
+      },
+    ).catchError(
+      (error) {
+        log("Failed to delete user: $error", name: "Deleted");
+      },
+    );
+  }
 }

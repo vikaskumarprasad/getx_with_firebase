@@ -79,9 +79,7 @@ class HomeController extends GetxController {
         .where('name', arrayContains: name)
         .get()
         .then((QuerySnapshot snapshot) {
-      for (var doc in snapshot.docs) {
-        log('searfajksdfl====>${doc.id} => ${doc.data()}');
-      }
+      for (var doc in snapshot.docs) {}
     }).catchError((error) {
       log("Failed to fetch users: $error");
     });

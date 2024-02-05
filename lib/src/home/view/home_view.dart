@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_with_firebase/common/app_extension.dart';
 import 'package:getx_with_firebase/src/home/controller/home_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -65,10 +66,10 @@ class _HomeViewState extends State<HomeView> {
                                 leading: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(2),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
-                                  height: 40,
-                                  width: 40,
+                                  height: 45,
+                                  width: 45,
                                 ),
                                 title: Container(
                                   decoration: BoxDecoration(
@@ -116,7 +117,28 @@ class _HomeViewState extends State<HomeView> {
                                 );
                               },
                               child: ListTile(
-                                leading: const FlutterLogo(),
+                                leading: Container(
+                                  height: 45,
+                                  width: 45,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: context
+                                        .generateRandomColor()
+                                        .withOpacity(0.2),
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    "${homeController.userList[index].title?[0].capitalizeFirst}",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.deepPurpleAccent,
+                                    ),
+                                  ),
+                                ),
                                 title: Text(
                                     '${homeController.userList[index].title}'),
                                 subtitle: Text(

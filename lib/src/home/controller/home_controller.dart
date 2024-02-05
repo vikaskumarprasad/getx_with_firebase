@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,6 +13,8 @@ class HomeController extends GetxController {
   TextEditingController descriptionController = TextEditingController();
   RxList<UserModel> userList = <UserModel>[].obs;
   RxList<String> list = <String>[].obs;
+  RxBool isUpdate = false.obs;
+  RxBool isLoading = true.obs;
 
   Future<void> addUser() {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -35,6 +38,7 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchUsers() {
+    isLoading.value = true;
     userList.clear();
     list.clear();
     CollectionReference users = FirebaseFirestore.instance.collection('users');
@@ -45,6 +49,9 @@ class HomeController extends GetxController {
           UserModel.fromJson(doc.data()),
         );
       }
+      Timer(const Duration(seconds: 3), () {
+        isLoading.value = false;
+      });
     }).catchError(
       (error) {
         log("Failed to fetch users: $error", name: "FetchUsers");
@@ -64,5 +71,19 @@ class HomeController extends GetxController {
         log("Failed to delete user: $error", name: "Deleted");
       },
     );
+  }
+
+  Future<void> fetchUsersByName({required String name}) {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    return users
+        .where('name', arrayContains: name)
+        .get()
+        .then((QuerySnapshot snapshot) {
+      for (var doc in snapshot.docs) {
+        log('searfajksdfl====>${doc.id} => ${doc.data()}');
+      }
+    }).catchError((error) {
+      log("Failed to fetch users: $error");
+    });
   }
 }

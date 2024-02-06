@@ -4,6 +4,8 @@ import 'package:getx_with_firebase/common/app_extension.dart';
 import 'package:getx_with_firebase/src/home/controller/home_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
+import 'add_item.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -99,22 +101,22 @@ class _HomeViewState extends State<HomeView> {
                             )
                           : InkWell(
                               onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return UpdateItem(
-                                      titlecontroller: homeController
-                                          .userList[index].title
-                                          .toString(),
-                                      namecontroller: homeController
-                                          .userList[index].name
-                                          .toString(),
-                                      descontroller: homeController
-                                          .userList[index].description
-                                          .toString(),
-                                    ); // Custom dialog widget
-                                  },
-                                );
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext context) {
+                                //     return UpdateItem(
+                                //       titlecontroller: homeController
+                                //           .userList[index].title
+                                //           .toString(),
+                                //       namecontroller: homeController
+                                //           .userList[index].name
+                                //           .toString(),
+                                //       descontroller: homeController
+                                //           .userList[index].description
+                                //           .toString(),
+                                //     ); // Custom dialog widget
+                                //   },
+                                // );
                               },
                               child: ListTile(
                                 leading: Container(
@@ -177,12 +179,7 @@ class _HomeViewState extends State<HomeView> {
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const AddItemDialog(); // Custom dialog widget
-            },
-          );
+          Get.to(const AddItemDialog());
         },
         child: const Text("Add"),
       ),
@@ -247,56 +244,6 @@ class _UpdateItemState extends State<UpdateItem> {
             Navigator.of(context).pop(); // Close the dialog
           },
           child: const Text('Update'),
-        ),
-      ],
-    );
-  }
-}
-
-class AddItemDialog extends StatefulWidget {
-  const AddItemDialog({super.key});
-
-  @override
-  State<AddItemDialog> createState() => _AddItemDialogState();
-}
-
-class _AddItemDialogState extends State<AddItemDialog> {
-  HomeController homeController = Get.put(HomeController());
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Add Item'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: homeController.titleController,
-            decoration: const InputDecoration(labelText: 'Title'),
-          ),
-          TextField(
-            controller: homeController.nameController,
-            decoration: const InputDecoration(labelText: 'Name'),
-          ),
-          TextField(
-            controller: homeController.descriptionController,
-            decoration: const InputDecoration(labelText: 'Description'),
-          ),
-        ],
-      ),
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop(); // Close the dialog
-          },
-          child: const Text('Cancel'),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            homeController.addUser();
-            Navigator.of(context).pop(); // Close the dialog
-          },
-          child: const Text('Add'),
         ),
       ],
     );

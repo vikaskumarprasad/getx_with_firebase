@@ -47,6 +47,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:getx_with_firebase/src/home/view/home_view.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'firebase_options.dart';
 import 'utils/NotificationManager.dart';
@@ -63,9 +64,15 @@ late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   if (!kIsWeb) {
     await setupFlutterNotifications();
@@ -127,7 +134,6 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     final firebaseMessaging = FCM();
     firebaseMessaging.setNotifications();
-
     FirebaseMessaging.instance.getInitialMessage().then(
           (value) => setState(
             () {

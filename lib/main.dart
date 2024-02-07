@@ -175,6 +175,7 @@ class _MyAppState extends State<MyApp> {
         notification.body,
         NotificationDetails(
           android: AndroidNotificationDetails(
+            fullScreenIntent: true,
             channel.id,
             channel.name,
             channelDescription: channel.description,

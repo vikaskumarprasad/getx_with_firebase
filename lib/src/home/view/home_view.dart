@@ -15,11 +15,27 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   HomeController homeController = Get.put(HomeController());
+  final FocusNode _focus = FocusNode();
+  TextEditingController textController = TextEditingController();
 
   @override
   void initState() {
-    homeController.fetchUsers();
     super.initState();
+    homeController.fetchUsers();
+    _focus.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+    _focus
+      ..removeListener(_onFocusChange)
+      ..dispose();
+  }
+
+  void _onFocusChange() {
+    setState(() {});
   }
 
   @override
@@ -50,130 +66,151 @@ class _HomeViewState extends State<HomeView> {
       body: Obx(() {
         return RefreshIndicator(
           onRefresh: homeController.fetchUsers,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                child: ListView.builder(
-                  itemCount: homeController.userList.value.length,
-                  itemBuilder: (context, index) {
-                    return Obx(
-                      () => homeController.isLoading.value
-                          ? Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: ListTile(
-                                leading: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(30),
-                                  ),
-                                  height: 45,
-                                  width: 45,
-                                ),
-                                title: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  height: 15,
-                                  width: double.infinity,
-                                ),
-                                subtitle: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  height: 15,
-                                  width: double.infinity,
-                                ),
-                                trailing: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[300],
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  height: 40,
-                                  width: 10,
-                                ),
-                              ),
-                            )
-                          : InkWell(
-                              onTap: () {
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (BuildContext context) {
-                                //     return UpdateItem(
-                                //       titlecontroller: homeController
-                                //           .userList[index].title
-                                //           .toString(),
-                                //       namecontroller: homeController
-                                //           .userList[index].name
-                                //           .toString(),
-                                //       descontroller: homeController
-                                //           .userList[index].description
-                                //           .toString(),
-                                //     ); // Custom dialog widget
-                                //   },
-                                // );
-                              },
-                              child: ListTile(
-                                leading: Container(
-                                  height: 45,
-                                  width: 45,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    color: context
-                                        .generateRandomColor()
-                                        .withOpacity(0.2),
-                                    borderRadius: const BorderRadius.all(
-                                      Radius.circular(30),
-                                    ),
-                                  ),
-                                  child: Text(
-                                    "${homeController.userList[index].title?[0].capitalizeFirst}",
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.deepPurpleAccent,
-                                    ),
-                                  ),
-                                ),
-                                title: Text(
-                                    '${homeController.userList[index].title}'),
-                                subtitle: Text(
-                                    '${homeController.userList[index].name}'),
-                                trailing: InkWell(
-                                  onTap: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return DeleteUserDialog(
-                                          username: homeController
-                                              .userList[index].title
-                                              .toString(),
-                                          // Pass the username you want to delete
-                                          onPressed: () async {
-                                            await homeController.deleteUser(
-                                                userId:
-                                                    homeController.list[index]);
-                                            Navigator.of(context).pop();
-                                          },
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: const Icon(Icons.more_vert),
-                                ),
-                              ),
-                            ),
-                    );
-                  },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-            ],
+                TextField(
+                  controller: textController,
+                  keyboardType: TextInputType.none,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                  focusNode: _focus,
+                ),
+                const Spacer(),
+                _focus.hasFocus
+                    ? NumericKeypad(
+                        controller: textController,
+                        focusNode: _focus,
+                      )
+                    : Container(),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: homeController.userList.value.length,
+                    itemBuilder: (context, index) {
+                      return Obx(
+                        () => homeController.isLoading.value
+                            ? Shimmer.fromColors(
+                                baseColor: Colors.grey[300]!,
+                                highlightColor: Colors.grey[100]!,
+                                child: ListTile(
+                                  leading: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    height: 45,
+                                    width: 45,
+                                  ),
+                                  title: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    height: 15,
+                                    width: double.infinity,
+                                  ),
+                                  subtitle: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    height: 15,
+                                    width: double.infinity,
+                                  ),
+                                  trailing: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[300],
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    height: 40,
+                                    width: 10,
+                                  ),
+                                ),
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  // showDialog(
+                                  //   context: context,
+                                  //   builder: (BuildContext context) {
+                                  //     return UpdateItem(
+                                  //       titlecontroller: homeController
+                                  //           .userList[index].title
+                                  //           .toString(),
+                                  //       namecontroller: homeController
+                                  //           .userList[index].name
+                                  //           .toString(),
+                                  //       descontroller: homeController
+                                  //           .userList[index].description
+                                  //           .toString(),
+                                  //     ); // Custom dialog widget
+                                  //   },
+                                  // );
+                                },
+                                child: ListTile(
+                                  leading: Container(
+                                    height: 45,
+                                    width: 45,
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: context
+                                          .generateRandomColor()
+                                          .withOpacity(0.2),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(30),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      "${homeController.userList[index].title?[0].capitalizeFirst}",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.deepPurpleAccent,
+                                      ),
+                                    ),
+                                  ),
+                                  title: Text(
+                                      '${homeController.userList[index].title}'),
+                                  subtitle: Text(
+                                      '${homeController.userList[index].name}'),
+                                  trailing: InkWell(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return DeleteUserDialog(
+                                            username: homeController
+                                                .userList[index].title
+                                                .toString(),
+                                            // Pass the username you want to delete
+                                            onPressed: () async {
+                                              await homeController.deleteUser(
+                                                  userId: homeController
+                                                      .list[index]);
+                                              Navigator.of(context).pop();
+                                            },
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: const Icon(Icons.more_vert),
+                                  ),
+                                ),
+                              ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       }),
@@ -325,5 +362,293 @@ class _CustomSearchDialogState extends State<CustomSearchDialog> {
   void dispose() {
     _searchController.dispose();
     super.dispose();
+  }
+}
+
+class NumericKeypad extends StatefulWidget {
+  final TextEditingController controller;
+  final FocusNode focusNode;
+
+  const NumericKeypad(
+      {super.key, required this.controller, required this.focusNode});
+
+  @override
+  State<NumericKeypad> createState() => _NumericKeypadState();
+}
+
+class _NumericKeypadState extends State<NumericKeypad> {
+  late TextEditingController _controller;
+  late TextSelection _selection;
+  late FocusNode _focusNode;
+  String temp = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = widget.controller..addListener(_onSelectionChanged);
+    _selection = _controller.selection;
+    _focusNode = widget.focusNode;
+  }
+
+  @override
+  void dispose() {
+    _controller.removeListener(_onSelectionChanged);
+    super.dispose();
+  }
+
+  void _onSelectionChanged() {
+    setState(() {
+      _selection = _controller.selection;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          children: [
+            _buildButton('1'),
+            _buildButton('2'),
+            _buildButton('3'),
+          ],
+        ),
+        Row(
+          children: [
+            _buildButton('4'),
+            _buildButton('5'),
+            _buildButton('6'),
+          ],
+        ),
+        Row(
+          children: [
+            _buildButton('7'),
+            _buildButton('8'),
+            _buildButton('9'),
+          ],
+        ),
+        Row(
+          children: [
+            _buildButton('⇓', onPressed: _hideKeyboard),
+            _buildButton('0'),
+            _buildButton('⌫', onPressed: _backspace),
+          ],
+        ),
+      ],
+    );
+  }
+
+  _hideKeyboard() => _focusNode.unfocus();
+
+  Widget _buildButton(String text, {VoidCallback? onPressed}) {
+    return Expanded(
+      child: Padding(
+        padding:
+            const EdgeInsetsDirectional.symmetric(horizontal: 5, vertical: 5),
+        child: CustomButton(
+          onPressed: onPressed ?? () => _input(text),
+          text: text,
+        ),
+      ),
+    );
+  }
+
+  void _input(String text) {
+    int position = _selection.base.offset;
+
+    var value = _controller.text;
+    if (value.isNotEmpty) {
+      var suffix = value.substring(position, value.length);
+      value = value.substring(0, position) + text + suffix;
+      _controller.text = value;
+      _controller.selection =
+          TextSelection.fromPosition(TextPosition(offset: position + 1));
+    } else {
+      value = _controller.text + text;
+      _controller.text = value;
+      _controller.selection =
+          TextSelection.fromPosition(const TextPosition(offset: 1));
+    }
+  }
+
+  void _backspace() {
+    int position = _selection.base.offset;
+    final value = _controller.text;
+    if (value.isNotEmpty && position != 0) {
+      var suffix = value.substring(position, value.length);
+      _controller.text = value.substring(0, position - 1) + suffix;
+
+      _controller.selection =
+          TextSelection.fromPosition(TextPosition(offset: position - 1));
+    }
+  }
+}
+
+class CommonButton extends StatefulWidget {
+  const CommonButton({super.key});
+
+  @override
+  State<CommonButton> createState() => _CommonButtonState();
+}
+
+class _CommonButtonState extends State<CommonButton> {
+  static const double _shadowHeight = 4;
+  double _position = 4;
+  @override
+  Widget build(BuildContext context) {
+    const double _height = 64 - _shadowHeight;
+    return Scaffold(
+      body: Center(
+        child: GestureDetector(
+          onTapUp: (_) {
+            setState(() {
+              _position = 4;
+            });
+          },
+          onTapDown: (_) {
+            setState(() {
+              _position = 0;
+            });
+          },
+          onTapCancel: () {
+            setState(() {
+              _position = 4;
+            });
+          },
+          child: SizedBox(
+            height: _height + _shadowHeight,
+            width: 200,
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    height: _height,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                  ),
+                ),
+                AnimatedPositioned(
+                  curve: Curves.easeIn,
+                  bottom: _position,
+                  duration: const Duration(milliseconds: 70),
+                  child: Container(
+                    height: _height,
+                    width: 200,
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Click me!',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  final String text;
+
+  const CustomButton({
+    Key? key,
+    required this.onPressed,
+    required this.text,
+  }) : super(key: key);
+
+  @override
+  State<CustomButton> createState() => _CustomButtonState();
+}
+
+class _CustomButtonState extends State<CustomButton> {
+  static const double _shadowHeight = 4;
+  double _position = 4;
+
+  @override
+  Widget build(BuildContext context) {
+    const double height = 55 - _shadowHeight;
+    return GestureDetector(
+      onTapUp: (_) {
+        setState(() {
+          _position = 5;
+        });
+        widget.onPressed();
+      },
+      onTapDown: (_) {
+        setState(() {
+          _position = 0;
+        });
+      },
+      onTapCancel: () {
+        setState(() {
+          _position = 5;
+        });
+      },
+      child: SizedBox(
+        height: height + _shadowHeight,
+        width: 120,
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: height,
+                width: 120,
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16),
+                  ),
+                ),
+              ),
+            ),
+            AnimatedPositioned(
+              curve: Curves.easeIn,
+              bottom: _position,
+              duration: const Duration(milliseconds: 70),
+              child: Container(
+                height: height,
+                width: 120,
+                decoration: const BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16),
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    widget.text,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

@@ -20,7 +20,7 @@ class HomeController extends GetxController {
   RxBool isUpdate = false.obs;
   RxBool isLoading = true.obs;
   RxString uploadedImage = "".obs;
-
+  RxDouble position = 4.0.obs;
   Future<void> addUser() {
     CollectionReference users = FirebaseFirestore.instance.collection('users');
     return users.add({

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_with_firebase/common/app_extension.dart';
+import 'package:getx_with_firebase/login_screen.dart';
 import 'package:getx_with_firebase/src/home/controller/home_controller.dart';
+import 'package:neopop/neopop.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'add_item.dart';
@@ -73,24 +75,13 @@ class _HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                ElevatedButton(
+                  onPressed: () => Get.to(const LoginScreen()),
+                  child: const Text("KeyboardDemo"),
+                ),
                 const SizedBox(
-                  height: 10,
+                  height: 50,
                 ),
-                TextField(
-                  controller: textController,
-                  keyboardType: TextInputType.none,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                  ),
-                  focusNode: _focus,
-                ),
-                const Spacer(),
-                _focus.hasFocus
-                    ? NumericKeypad(
-                        controller: textController,
-                        focusNode: _focus,
-                      )
-                    : Container(),
                 Expanded(
                   child: ListView.builder(
                     itemCount: homeController.userList.value.length,
@@ -236,6 +227,7 @@ class UpdateItem extends StatefulWidget {
   final String titlecontroller;
   final String namecontroller;
   final String descontroller;
+
   const UpdateItem({
     super.key,
     required this.titlecontroller,
@@ -328,6 +320,7 @@ class CustomSearchDialog extends StatefulWidget {
 class _CustomSearchDialogState extends State<CustomSearchDialog> {
   final TextEditingController _searchController = TextEditingController();
   HomeController homeController = Get.put(HomeController());
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -443,11 +436,28 @@ class _NumericKeypadState extends State<NumericKeypad> {
   Widget _buildButton(String text, {VoidCallback? onPressed}) {
     return Expanded(
       child: Padding(
-        padding:
-            const EdgeInsetsDirectional.symmetric(horizontal: 5, vertical: 5),
-        child: CustomButton(
-          onPressed: onPressed ?? () => _input(text),
-          text: text,
+        padding: const EdgeInsetsDirectional.symmetric(
+          horizontal: 8,
+          vertical: 5,
+        ),
+        child: NeoPopButton(
+          depth: 5,
+          shadowColor: Colors.black,
+          color: Colors.deepPurpleAccent,
+          onTapUp: () {},
+          onTapDown: onPressed ?? () => _input(text),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -484,88 +494,6 @@ class _NumericKeypadState extends State<NumericKeypad> {
   }
 }
 
-class CommonButton extends StatefulWidget {
-  const CommonButton({super.key});
-
-  @override
-  State<CommonButton> createState() => _CommonButtonState();
-}
-
-class _CommonButtonState extends State<CommonButton> {
-  static const double _shadowHeight = 4;
-  double _position = 4;
-  @override
-  Widget build(BuildContext context) {
-    const double _height = 64 - _shadowHeight;
-    return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          onTapUp: (_) {
-            setState(() {
-              _position = 4;
-            });
-          },
-          onTapDown: (_) {
-            setState(() {
-              _position = 0;
-            });
-          },
-          onTapCancel: () {
-            setState(() {
-              _position = 4;
-            });
-          },
-          child: SizedBox(
-            height: _height + _shadowHeight,
-            width: 200,
-            child: Stack(
-              children: [
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    height: _height,
-                    width: 200,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16),
-                      ),
-                    ),
-                  ),
-                ),
-                AnimatedPositioned(
-                  curve: Curves.easeIn,
-                  bottom: _position,
-                  duration: const Duration(milliseconds: 70),
-                  child: Container(
-                    height: _height,
-                    width: 200,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(16),
-                      ),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Click me!',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class CustomButton extends StatefulWidget {
   final VoidCallback onPressed;
   final String text;
@@ -582,73 +510,70 @@ class CustomButton extends StatefulWidget {
 
 class _CustomButtonState extends State<CustomButton> {
   static const double _shadowHeight = 4;
-  double _position = 4;
-
+  // double _position = 4;
+  HomeController homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     const double height = 55 - _shadowHeight;
-    return GestureDetector(
-      onTapUp: (_) {
-        setState(() {
-          _position = 5;
-        });
-        widget.onPressed();
-      },
-      onTapDown: (_) {
-        setState(() {
-          _position = 0;
-        });
-      },
-      onTapCancel: () {
-        setState(() {
-          _position = 5;
-        });
-      },
-      child: SizedBox(
-        height: height + _shadowHeight,
-        width: 120,
-        child: Stack(
-          children: [
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: height,
-                width: 120,
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                ),
-              ),
-            ),
-            AnimatedPositioned(
-              curve: Curves.easeIn,
-              bottom: _position,
-              duration: const Duration(milliseconds: 70),
-              child: Container(
-                height: height,
-                width: 120,
-                decoration: const BoxDecoration(
-                  color: Colors.deepPurpleAccent,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16),
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    widget.text,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
+    return Obx(() {
+      return GestureDetector(
+        onTapUp: (_) {
+          homeController.position.value = 5.0;
+          // widget.onPressed();
+        },
+        onTapDown: (_) {
+          homeController.position.value = 0.0;
+        },
+        onTapCancel: () {
+          homeController.position.value = 5.0;
+        },
+        child: SizedBox(
+          height: height + _shadowHeight,
+          width: 120,
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 0,
+                child: Container(
+                  height: height,
+                  width: 120,
+                  decoration: const BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+              AnimatedPositioned(
+                curve: Curves.easeIn,
+                bottom: homeController.position.value,
+                duration: const Duration(milliseconds: 70),
+                child: Container(
+                  height: height,
+                  width: 120,
+                  decoration: const BoxDecoration(
+                    color: Colors.deepPurpleAccent,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      widget.text,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

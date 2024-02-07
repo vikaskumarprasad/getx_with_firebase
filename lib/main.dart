@@ -46,6 +46,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
 import 'package:getx_with_firebase/src/home/view/home_view.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -226,7 +227,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       navigatorKey: NavigationService.navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(

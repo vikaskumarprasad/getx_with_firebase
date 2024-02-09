@@ -479,7 +479,63 @@ class _MainViewState extends State<MainView> {
                     const Spacer(),
                     CircleAvatar(
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Center(
+                                child: Material(
+                                  type: MaterialType.transparency,
+                                  child: Stack(
+                                    alignment: Alignment.topRight,
+                                    children: [
+                                      Container(
+                                        margin: const EdgeInsets.all(20),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16),
+                                          color: Colors.deepPurpleAccent,
+                                          // gradient: boxGradient,
+                                        ),
+                                        padding: const EdgeInsets.only(
+                                          top: 2,
+                                          bottom: 2,
+                                        ),
+                                        width: 500,
+                                        height: 400,
+                                        child: const Center(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              // Image.network(
+                                              //   "",
+                                              //   height: 250,
+                                              //   width: 250,
+                                              //   fit: BoxFit.contain,
+                                              // ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      InkResponse(
+                                        radius: 5,
+                                        onTap: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Icon(
+                                          Icons.cancel,
+                                          color: Colors.white,
+                                          size: 25,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         icon: const Icon(
                           Icons.person,
                         ),

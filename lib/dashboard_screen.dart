@@ -442,8 +442,22 @@ class _MainViewState extends State<MainView> {
     DefaultTabController(
       length: 6,
       child: Scaffold(
+        backgroundColor: Colors.deepPurpleAccent,
         appBar: AppBar(
           backgroundColor: Colors.deepPurpleAccent,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CircleAvatar(
+                child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.person,
+                  ),
+                ),
+              ),
+            ),
+          ],
           title: const Text(
             "Dashboard",
             style: TextStyle(
@@ -540,24 +554,125 @@ class _MainViewState extends State<MainView> {
         ),
         body: TabBarView(
           children: <Widget>[
-            Center(
-              child: Column(
-                children: [
-                  SelectionArea(
-                    child: const Text(
-                      "Flutter provides a rich builtin support for animations and transitions, but there are several packages that can make your life easier when it comes to adding quick, complex and customized animations better suited for your app. Also there are packages that can help you access efficient new age animation file formats like Lottie and Rive. You can check out the complete list of Animation and Transition Flutter packages below.",
-                      style: TextStyle(
-                        color: Colors.deepPurpleAccent,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ).animate().fadeIn(duration: 400.ms, delay: 200.ms).move(
-                          begin: const Offset(-16, 0),
-                          curve: Curves.easeOutQuad,
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          // color: Theme.of(context).colorScheme.primary,
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                margin: const EdgeInsets.all(12),
+                                height: 70,
+                                child: const Text(
+                                  "This is a text widget.",
+                                  // style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              const Icon(Icons.person)
+                            ],
+                          ),
                         ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          // color: Theme.of(context).colorScheme.primary,
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                margin: const EdgeInsets.all(12),
+                                height: 70,
+                                child: const Text(
+                                  "This is a text widget.",
+                                  // style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              const Icon(Icons.person)
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          // color: Theme.of(context).colorScheme.primary,
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                margin: const EdgeInsets.all(12),
+                                height: 70,
+                                child: const Text(
+                                  "This is a text widget.",
+                                  // style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              const Icon(Icons.person)
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          // color: Theme.of(context).colorScheme.primary,
+                          clipBehavior: Clip.antiAlias,
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Row(
+                            children: [
+                              Container(
+                                alignment: Alignment.bottomLeft,
+                                margin: const EdgeInsets.all(12),
+                                height: 70,
+                                child: const Text(
+                                  "This is a text widget.",
+                                  // style: Theme.of(context).textTheme.bodyText1,
+                                ),
+                              ),
+                              const Icon(Icons.person)
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             const Center(
               child: Text("It's rainy here"),
@@ -604,6 +719,84 @@ class _MainViewState extends State<MainView> {
         ),
       ),
     ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Account',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Settings',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Account',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Account',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Settings',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
+    Container(
+      height: double.infinity,
+      width: double.infinity,
+      color: Colors.deepPurpleAccent,
+      child: const Center(
+        child: Text(
+          'Account',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    ),
   ];
 
   /// The currently selected index of the bar
@@ -624,6 +817,30 @@ class _MainViewState extends State<MainView> {
           SideNavigationBar(
             selectedIndex: selectedIndex,
             items: const [
+              SideNavigationBarItem(
+                icon: Icons.dashboard,
+                label: 'Dashboard',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.person,
+                label: 'Account',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.settings,
+                label: 'Settings',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.dashboard,
+                label: 'Dashboard',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.person,
+                label: 'Account',
+              ),
+              SideNavigationBarItem(
+                icon: Icons.settings,
+                label: 'Settings',
+              ),
               SideNavigationBarItem(
                 icon: Icons.dashboard,
                 label: 'Dashboard',

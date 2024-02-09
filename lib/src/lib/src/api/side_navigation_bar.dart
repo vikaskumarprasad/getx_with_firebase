@@ -116,6 +116,44 @@ class _SideNavigationBarState extends State<SideNavigationBar> {
           child: Column(
             children: [
               // Header
+              _expanded
+                  ? const Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 14, 0, 2),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: SizedBox(
+                          height: 50,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.data_usage_sharp,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Vikas Prasad",
+                                textAlign: TextAlign.start,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(
+                      height: 50,
+                      child: Icon(
+                        Icons.data_usage_sharp,
+                        color: Colors.white,
+                      ),
+                    ),
+              Divider(),
               _evaluateHeaderWidget(),
               _evaluateHeaderDivider(),
 

@@ -438,390 +438,431 @@ class MainView extends StatefulWidget {
 
 class _MainViewState extends State<MainView> {
   /// Views to display
-  List<Widget> views = [
-    DefaultTabController(
-      length: 6,
-      child: Column(
-        children: [
-          Container(
-            height: 50,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color(0xff1d2429),
-            ),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              child: Row(
-                children: [
-                  const Text(
-                    "Dashboard",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                      .animate()
-                      .fadeIn(duration: 400.ms, delay: 200.ms)
-                      .shimmer(
-                        blendMode: BlendMode.srcOver,
-                        color: Colors.deepPurpleAccent.shade400,
-                      )
-                      .move(
-                        begin: const Offset(-16, 0),
-                        curve: Curves.easeOutQuad,
-                      ),
-                  const Spacer(),
-                  CircleAvatar(
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.person,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: Scaffold(
-              backgroundColor: Colors.deepPurpleAccent,
-              appBar: AppBar(
-                backgroundColor: Colors.deepPurpleAccent,
-                bottom: const PreferredSize(
-                  preferredSize: Size.fromHeight(0),
-                  child: TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    dividerColor: Color(0xff4b986c),
-                    dividerHeight: 2,
-                    indicator: BoxDecoration(
-                      color: Color(0xff4b986c),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(8),
-                        topRight: Radius.circular(8),
-                      ),
-                    ),
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          "Cloudy1",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          "Cloudy2",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          "Cloudy3",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          "Cloudy4",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          "Cloudy5",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          "Cloudy6",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              body: TabBarView(
-                children: <Widget>[
-                  Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Card(
-                                margin: EdgeInsets.zero,
-                                // color: Theme.of(context).colorScheme.primary,
-                                clipBehavior: Clip.antiAlias,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
-                                      margin: const EdgeInsets.all(12),
-                                      height: 70,
-                                      child: const Text(
-                                        "This is a text widget.",
-                                        // style: Theme.of(context).textTheme.bodyText1,
-                                      ),
-                                    ),
-                                    const Icon(Icons.person)
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Card(
-                                margin: EdgeInsets.zero,
-                                // color: Theme.of(context).colorScheme.primary,
-                                clipBehavior: Clip.antiAlias,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
-                                      margin: const EdgeInsets.all(12),
-                                      height: 70,
-                                      child: const Text(
-                                        "This is a text widget.",
-                                        // style: Theme.of(context).textTheme.bodyText1,
-                                      ),
-                                    ),
-                                    const Icon(Icons.person)
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Card(
-                                margin: EdgeInsets.zero,
-                                // color: Theme.of(context).colorScheme.primary,
-                                clipBehavior: Clip.antiAlias,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
-                                      margin: const EdgeInsets.all(12),
-                                      height: 70,
-                                      child: const Text(
-                                        "This is a text widget.",
-                                        // style: Theme.of(context).textTheme.bodyText1,
-                                      ),
-                                    ),
-                                    const Icon(Icons.person)
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Card(
-                                margin: EdgeInsets.zero,
-                                // color: Theme.of(context).colorScheme.primary,
-                                clipBehavior: Clip.antiAlias,
-                                elevation: 0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.bottomLeft,
-                                      margin: const EdgeInsets.all(12),
-                                      height: 70,
-                                      child: const Text(
-                                        "This is a text widget.",
-                                        // style: Theme.of(context).textTheme.bodyText1,
-                                      ),
-                                    ),
-                                    const Icon(Icons.person)
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Center(
-                    child: Text("It's rainy here"),
-                  ),
-                  const Center(
-                    child: Text("It's sunny here"),
-                  ),
-                  const Center(
-                    child: Text("It's cloudy here"),
-                  ),
-                  const Center(
-                    child: Text("It's rainy here"),
-                  ),
-                  const Center(
-                    child: Text("It's sunny here"),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Settings',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-    Container(
-      height: double.infinity,
-      width: double.infinity,
-      color: Colors.deepPurpleAccent,
-      child: const Center(
-        child: Text(
-          'Account',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    ),
-  ];
-
   /// The currently selected index of the bar
   int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> views = [
+      DefaultTabController(
+        length: 6,
+        child: Column(
+          children: [
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color(0xff1d2429),
+              ),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                child: Row(
+                  children: [
+                    const Text(
+                      "Dashboard",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                        .animate()
+                        .fadeIn(duration: 400.ms, delay: 200.ms)
+                        .shimmer(
+                          blendMode: BlendMode.srcOver,
+                          color: Colors.deepPurpleAccent.shade400,
+                        )
+                        .move(
+                          begin: const Offset(-16, 0),
+                          curve: Curves.easeOutQuad,
+                        ),
+                    const Spacer(),
+                    CircleAvatar(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.person,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showGeneralDialog(
+                          barrierLabel: "Label",
+                          barrierDismissible: true,
+                          barrierColor: Colors.black.withOpacity(0.5),
+                          transitionDuration: const Duration(milliseconds: 500),
+                          context: context,
+                          pageBuilder: (context, anim1, anim2) {
+                            return Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                height: 500,
+                                width: 800,
+                                margin: const EdgeInsets.only(
+                                    bottom: 50, left: 12, right: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.deepPurpleAccent,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const SizedBox.expand(
+                                  child: FlutterLogo(),
+                                ),
+                              ),
+                            );
+                          },
+                          transitionBuilder: (context, anim1, anim2, child) {
+                            return SlideTransition(
+                              position: Tween(
+                                begin: const Offset(1, 0),
+                                end: const Offset(0, 0),
+                              ).animate(anim1),
+                              child: child,
+                            );
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.login_rounded,
+                        color: Colors.white,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              child: Scaffold(
+                backgroundColor: Colors.deepPurpleAccent,
+                appBar: AppBar(
+                  backgroundColor: Colors.deepPurpleAccent,
+                  bottom: const PreferredSize(
+                    preferredSize: Size.fromHeight(0),
+                    child: TabBar(
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      dividerColor: Color(0xff4b986c),
+                      dividerHeight: 2,
+                      indicator: BoxDecoration(
+                        color: Color(0xff4b986c),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
+                      ),
+                      tabs: [
+                        Tab(
+                          child: Text(
+                            "Cloudy1",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cloudy2",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cloudy3",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cloudy4",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cloudy5",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                        Tab(
+                          child: Text(
+                            "Cloudy6",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                body: TabBarView(
+                  children: <Widget>[
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  // color: Theme.of(context).colorScheme.primary,
+                                  clipBehavior: Clip.antiAlias,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.bottomLeft,
+                                        margin: const EdgeInsets.all(12),
+                                        height: 70,
+                                        child: const Text(
+                                          "This is a text widget.",
+                                          // style: Theme.of(context).textTheme.bodyText1,
+                                        ),
+                                      ),
+                                      const Icon(Icons.person)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  // color: Theme.of(context).colorScheme.primary,
+                                  clipBehavior: Clip.antiAlias,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.bottomLeft,
+                                        margin: const EdgeInsets.all(12),
+                                        height: 70,
+                                        child: const Text(
+                                          "This is a text widget.",
+                                          // style: Theme.of(context).textTheme.bodyText1,
+                                        ),
+                                      ),
+                                      const Icon(Icons.person)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  // color: Theme.of(context).colorScheme.primary,
+                                  clipBehavior: Clip.antiAlias,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.bottomLeft,
+                                        margin: const EdgeInsets.all(12),
+                                        height: 70,
+                                        child: const Text(
+                                          "This is a text widget.",
+                                          // style: Theme.of(context).textTheme.bodyText1,
+                                        ),
+                                      ),
+                                      const Icon(Icons.person)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Expanded(
+                                child: Card(
+                                  margin: EdgeInsets.zero,
+                                  // color: Theme.of(context).colorScheme.primary,
+                                  clipBehavior: Clip.antiAlias,
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.bottomLeft,
+                                        margin: const EdgeInsets.all(12),
+                                        height: 70,
+                                        child: const Text(
+                                          "This is a text widget.",
+                                          // style: Theme.of(context).textTheme.bodyText1,
+                                        ),
+                                      ),
+                                      const Icon(Icons.person)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Center(
+                      child: Text("It's rainy here"),
+                    ),
+                    const Center(
+                      child: Text("It's sunny here"),
+                    ),
+                    const Center(
+                      child: Text("It's cloudy here"),
+                    ),
+                    const Center(
+                      child: Text("It's rainy here"),
+                    ),
+                    const Center(
+                      child: Text("It's sunny here"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Account',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Account',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Account',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Account',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Settings',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      Container(
+        height: double.infinity,
+        width: double.infinity,
+        color: Colors.deepPurpleAccent,
+        child: const Center(
+          child: Text(
+            'Account',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    ];
     return Scaffold(
       /// You can use an AppBar if you want to
       //appBar: AppBar(
@@ -885,6 +926,39 @@ class _MainViewState extends State<MainView> {
           )
         ],
       ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Logout'),
+          content: const Text('Are you sure you want to logout?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Perform logout operation
+                // For example, you can navigate to the login screen
+                Navigator.of(context).pop(); // Close the dialog
+                // Navigator.pushReplacement(
+                //   context,
+                //   MaterialPageRoute(builder: (context) => LoginScreen()),
+                // );
+              },
+              child: const Text('Logout'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

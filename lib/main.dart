@@ -47,9 +47,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:getx_with_firebase/src/home/view/home_view.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'dashboard_screen.dart';
 import 'firebase_options.dart';
 import 'utils/NotificationManager.dart';
 import 'utils/global_context.dart';
@@ -229,6 +229,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: NavigationService.navigatorKey,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -236,7 +237,7 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       navigatorObservers: [NavigatorObserver()],
-      home: const HomeView(),
+      home: const MainView(),
     );
   }
 }

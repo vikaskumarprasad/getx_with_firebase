@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_with_firebase/common/app_extension.dart';
-import 'package:getx_with_firebase/login_screen.dart';
 import 'package:getx_with_firebase/src/home/controller/home_controller.dart';
 import 'package:neopop/neopop.dart';
 import 'package:shimmer/shimmer.dart';
@@ -75,13 +74,13 @@ class _HomeViewState extends State<HomeView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                /*  ElevatedButton(
                   onPressed: () => Get.to(const LoginScreen()),
                   child: const Text("KeyboardDemo"),
                 ),
                 const SizedBox(
                   height: 50,
-                ),
+                ),*/
                 Expanded(
                   child: ListView.builder(
                     itemCount: homeController.userList.value.length,

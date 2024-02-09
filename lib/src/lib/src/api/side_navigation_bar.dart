@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:getx_with_firebase/src/lib/src/api/side_bar_toggler.dart';
 import 'package:getx_with_firebase/src/lib/src/api/side_navigation_bar_footer.dart';
 import 'package:getx_with_firebase/src/lib/src/api/side_navigation_bar_header.dart';
@@ -146,6 +147,16 @@ class _SideNavigationBarState extends State<SideNavigationBar> {
                         ),
                       ),
                     )
+                      .animate()
+                      .fadeIn(duration: 200.ms, delay: 100.ms)
+                      .shimmer(
+                        blendMode: BlendMode.srcOver,
+                        color: Colors.white70,
+                      )
+                      .move(
+                        begin: const Offset(-16, 0),
+                        curve: Curves.easeOutQuad,
+                      )
                   : const SizedBox(
                       height: 50,
                       child: Icon(

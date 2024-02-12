@@ -444,11 +444,12 @@ class _MainViewState extends State<MainView> {
   @override
   Widget build(BuildContext context) {
     List<Widget> views = [
+      // const FinalView(),
       DefaultTabController(
         length: 6,
         child: Column(
           children: [
-            Container(
+            /*   Container(
               height: 50,
               width: double.infinity,
               decoration: const BoxDecoration(
@@ -561,9 +562,7 @@ class _MainViewState extends State<MainView> {
                                   color: Colors.deepPurpleAccent,
                                   borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: const SizedBox.expand(
-                                  child: FlutterLogo(),
-                                ),
+                                child: const SizedBox.expand(),
                               ),
                             );
                           },
@@ -587,86 +586,90 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
             ),
+            const Divider(color: Colors.white, height: 1),*/
             Expanded(
               child: Scaffold(
-                backgroundColor: Colors.deepPurpleAccent,
+                backgroundColor: const Color(0xff1d2429),
                 appBar: AppBar(
-                  backgroundColor: Colors.deepPurpleAccent,
+                  backgroundColor: const Color(0xff1d2429),
                   bottom: const PreferredSize(
                     preferredSize: Size.fromHeight(0),
-                    child: TabBar(
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      dividerColor: Color(0xff4b986c),
-                      dividerHeight: 2,
-                      indicator: BoxDecoration(
-                        color: Color(0xff4b986c),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
+                      child: TabBar(
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        dividerColor: Colors.grey,
+                        dividerHeight: 2,
+                        indicator: BoxDecoration(
+                          color: Color(0xff4b986c),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            topRight: Radius.circular(8),
+                          ),
                         ),
+                        tabs: [
+                          Tab(
+                            child: Text(
+                              "Cloudy1",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Cloudy2",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Cloudy3",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Cloudy4",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Cloudy5",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                          Tab(
+                            child: Text(
+                              "Cloudy6",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            "Cloudy1",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Cloudy2",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Cloudy3",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Cloudy4",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Cloudy5",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                        Tab(
-                          child: Text(
-                            "Cloudy6",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ),
@@ -817,7 +820,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Account',
@@ -830,7 +833,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Settings',
@@ -843,7 +846,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Account',
@@ -856,7 +859,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Settings',
@@ -869,7 +872,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Account',
@@ -882,7 +885,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Account',
@@ -895,7 +898,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Settings',
@@ -908,7 +911,7 @@ class _MainViewState extends State<MainView> {
       Container(
         height: double.infinity,
         width: double.infinity,
-        color: Colors.deepPurpleAccent,
+        color: const Color(0xff1d2429),
         child: const Center(
           child: Text(
             'Account',

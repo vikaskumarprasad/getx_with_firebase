@@ -576,6 +576,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  remixicon:
+    dependency: "direct main"
+    description:
+      name: remixicon
+      sha256: db970a7a473a0b44497d4326b5cdeb7a5ceb454006880e59102650243fd905e5
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   shimmer:
     dependency: "direct main"
     description:

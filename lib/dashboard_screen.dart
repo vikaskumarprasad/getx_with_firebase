@@ -428,6 +428,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:getx_with_firebase/src/lib/src/api/side_navigation_bar.dart';
 import 'package:getx_with_firebase/src/lib/src/api/side_navigation_bar_item.dart'
     show SideNavigationBarItem;
+import 'package:lottie/lottie.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
+import 'generated/assets.dart';
 
 class MainView extends StatefulWidget {
   const MainView({Key? key}) : super(key: key);
@@ -439,7 +443,45 @@ class MainView extends StatefulWidget {
 class _MainViewState extends State<MainView> {
   /// Views to display
   /// The currently selected index of the bar
+  ///
+  ///
+
+  bool isLoading = false;
   int selectedIndex = 0;
+  late String selectedAxisLabel;
+  late TrackballBehavior _trackballBehavior;
+  final List<ChartData> chartData = [
+    ChartData(0, 0.5),
+    ChartData(1, 15),
+    ChartData(2, 22),
+    ChartData(3, 25),
+    ChartData(4, 22),
+    ChartData(5, 50),
+    ChartData(6, 48),
+    ChartData(7, 59),
+    ChartData(8, 50),
+    ChartData(9, 55),
+    ChartData(10, 50),
+    ChartData(11, 55),
+    ChartData(12, 60),
+    ChartData(12, 50),
+    ChartData(14, 65),
+    ChartData(15, 60),
+    ChartData(16, 55),
+    ChartData(17, 59),
+    ChartData(18, 45),
+    ChartData(19, 60),
+    ChartData(20, 65),
+  ];
+
+  @override
+  void initState() {
+    _trackballBehavior = TrackballBehavior(
+      enable: true,
+    );
+    selectedAxisLabel = '';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -610,7 +652,7 @@ class _MainViewState extends State<MainView> {
                         tabs: [
                           Tab(
                             child: Text(
-                              "Cloudy1",
+                              "Product",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -675,126 +717,862 @@ class _MainViewState extends State<MainView> {
                 ),
                 body: TabBarView(
                   children: <Widget>[
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  // color: Theme.of(context).colorScheme.primary,
-                                  clipBehavior: Clip.antiAlias,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                    isLoading
+                        ? Center(
+                            child: Lottie.asset(Assets.imageLoading),
+                            // child: CircularProgressIndicator(
+                            //   color: Colors.deepPurpleAccent,
+                            //   strokeCap: StrokeCap.square,
+                            //   strokeWidth: 5,
+                            // ),
+                          )
+                        : SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      8, 12, 0, 8),
+                                  child: const Text(
+                                    "Top Product & Profile/Loss",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  )
+                                      .animate()
+                                      .fade(
+                                        duration: 600.ms,
+                                      )
+                                      // baseline=800ms
+                                      .slideY(
+                                        curve: Curves.easeInOut,
+                                        delay: 0.ms,
+                                        duration: 600.ms,
+                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12, 12, 12, 12),
+                                  child: SizedBox(
+                                    height: 200,
+                                    child: Row(
+                                        children: AnimateList(
+                                      interval: 400.ms,
+                                      effects: [FadeEffect(duration: 300.ms)],
+                                      children: [
+                                        Flexible(
+                                          flex: 1,
+                                          child: Card(
+                                            margin: EdgeInsets.zero,
+                                            color: const Color(0xff1d2429),
+                                            clipBehavior: Clip.antiAlias,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              side: const BorderSide(
+                                                color: Colors.white24,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: SfCartesianChart(
+                                                plotAreaBorderWidth: 0,
+                                                // X top line
+                                                plotAreaBorderColor:
+                                                    Colors.white24,
+
+                                                primaryXAxis:
+                                                    const CategoryAxis(
+                                                  // labelStyle: TextStyle(
+                                                  //     color: Colors.white,
+                                                  //     fontSize: 0),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks below X line
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                    width: 0.5,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  axisLine: AxisLine(
+                                                    // X bottom line
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                ),
+                                                primaryYAxis:
+                                                    const CategoryAxis(
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                          width: 1,
+                                                          color: Colors.white24,
+                                                          dashArray: <double>[
+                                                        5,
+                                                        5
+                                                      ]),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks on left side
+                                                  axisLine: AxisLine(
+                                                    color: Colors
+                                                        .transparent, // Y left line
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                  // maximum: 100,
+                                                ),
+                                                series: <CartesianSeries>[
+                                                  SplineAreaSeries<ChartData,
+                                                      double>(
+                                                    dataSource: chartData,
+                                                    splineType:
+                                                        SplineType.cardinal,
+                                                    xValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.x,
+                                                    yValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.y,
+                                                    borderWidth: 4,
+                                                    borderColor: Colors.green,
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.green[200]!,
+                                                        const Color(0xff1d2429),
+                                                      ],
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                              .animate()
+                                              .fade(
+                                                duration: 600.ms,
+                                              )
+                                              // baseline=800ms
+                                              .slideX(
+                                                curve: Curves.easeInOut,
+                                                delay: 0.ms,
+                                                duration: 600.ms,
+                                              ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Flexible(
+                                          flex: 1,
+                                          child: Card(
+                                            margin: EdgeInsets.zero,
+                                            color: const Color(0xff1d2429),
+                                            clipBehavior: Clip.antiAlias,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              side: const BorderSide(
+                                                color: Colors.white24,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: SfCartesianChart(
+                                                plotAreaBorderWidth: 0,
+                                                // X top line
+                                                plotAreaBorderColor:
+                                                    Colors.white24,
+
+                                                primaryXAxis:
+                                                    const CategoryAxis(
+                                                  // labelStyle: TextStyle(
+                                                  //     color: Colors.white,
+                                                  //     fontSize: 0),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks below X line
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                    width: 0.5,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  axisLine: AxisLine(
+                                                    // X bottom line
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                ),
+                                                primaryYAxis:
+                                                    const CategoryAxis(
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                          width: 1,
+                                                          color: Colors.white24,
+                                                          dashArray: <double>[
+                                                        5,
+                                                        5
+                                                      ]),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks on left side
+                                                  axisLine: AxisLine(
+                                                    color: Colors
+                                                        .transparent, // Y left line
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                  // maximum: 100,
+                                                ),
+                                                series: <CartesianSeries>[
+                                                  SplineAreaSeries<ChartData,
+                                                      double>(
+                                                    dataSource: chartData,
+                                                    splineType:
+                                                        SplineType.cardinal,
+                                                    xValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.x,
+                                                    yValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.y,
+                                                    borderWidth: 4,
+                                                    borderColor: Colors.green,
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.green[200]!,
+                                                        const Color(0xff1d2429),
+                                                      ],
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                              .animate()
+                                              .fade(
+                                                duration: 1200.ms,
+                                              )
+                                              // baseline=800ms
+                                              .slideX(
+                                                curve: Curves.easeInOut,
+                                                delay: 0.ms,
+                                                duration: 1200.ms,
+                                              ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Flexible(
+                                          flex: 1,
+                                          child: Card(
+                                            margin: EdgeInsets.zero,
+                                            color: const Color(0xff1d2429),
+                                            clipBehavior: Clip.antiAlias,
+                                            elevation: 0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              side: const BorderSide(
+                                                color: Colors.white24,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: SfCartesianChart(
+                                                plotAreaBorderWidth: 0,
+                                                // X top line
+                                                plotAreaBorderColor:
+                                                    Colors.white24,
+
+                                                primaryXAxis:
+                                                    const CategoryAxis(
+                                                  // labelStyle: TextStyle(
+                                                  //     color: Colors.white,
+                                                  //     fontSize: 0),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks below X line
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                    width: 0.5,
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  axisLine: AxisLine(
+                                                    // X bottom line
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                ),
+                                                primaryYAxis:
+                                                    const CategoryAxis(
+                                                  majorGridLines:
+                                                      MajorGridLines(
+                                                          width: 1,
+                                                          color: Colors.white24,
+                                                          dashArray: <double>[
+                                                        5,
+                                                        5
+                                                      ]),
+                                                  majorTickLines:
+                                                      MajorTickLines(width: 0),
+                                                  // Little sticks on left side
+                                                  axisLine: AxisLine(
+                                                    color: Colors
+                                                        .transparent, // Y left line
+                                                    dashArray: <double>[5, 5],
+                                                  ),
+                                                  minimum: 0,
+                                                  // maximum: 100,
+                                                ),
+                                                series: <CartesianSeries>[
+                                                  SplineAreaSeries<ChartData,
+                                                      double>(
+                                                    dataSource: chartData,
+                                                    splineType:
+                                                        SplineType.cardinal,
+                                                    xValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.x,
+                                                    yValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.y,
+                                                    borderWidth: 4,
+                                                    borderColor: Colors.red,
+                                                    gradient: LinearGradient(
+                                                      colors: [
+                                                        Colors.red[200]!,
+                                                        const Color(0xff1d2429),
+                                                      ],
+                                                      begin:
+                                                          Alignment.topCenter,
+                                                      end: Alignment
+                                                          .bottomCenter,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                          )
+                                              .animate()
+                                              .fade(
+                                                duration: 2100.ms,
+                                              )
+                                              // baseline=800ms
+                                              .slideX(
+                                                curve: Curves.easeInOut,
+                                                delay: 0.ms,
+                                                duration: 2100.ms,
+                                              ),
+                                        ),
+                                      ],
+                                    )),
                                   ),
+                                ),
+                                const Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 12, 12, 12),
+                                  child: Text(
+                                    "Best Selling Products",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+// or shorthand:
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12, 12, 12, 12),
                                   child: Row(
                                     children: [
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        margin: const EdgeInsets.all(12),
-                                        height: 70,
-                                        child: const Text(
-                                          "This is a text widget.",
-                                          // style: Theme.of(context).textTheme.bodyText1,
+                                      Expanded(
+                                        child: Card(
+                                          color: const Color(0xff1d2429),
+                                          margin: EdgeInsets.zero,
+                                          clipBehavior: Clip.antiAlias,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: const BorderSide(
+                                              color: Colors.white24,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SfCartesianChart(
+                                              // primaryXAxis: const CategoryAxis(),
+                                              plotAreaBorderWidth: 0,
+                                              // X top line
+                                              plotAreaBorderColor:
+                                                  Colors.white24,
+
+                                              primaryXAxis: const CategoryAxis(
+                                                // labelStyle: TextStyle(
+                                                //     color: Colors.white,
+                                                //     fontSize: 0),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks below X line
+                                                majorGridLines: MajorGridLines(
+                                                  width: 0.5,
+                                                  color: Colors.transparent,
+                                                ),
+                                                axisLine: AxisLine(
+                                                  // X bottom line
+                                                  color: Colors.white24,
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                              ),
+                                              primaryYAxis: const CategoryAxis(
+                                                majorGridLines: MajorGridLines(
+                                                    width: 1,
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5]),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks on left side
+                                                axisLine: AxisLine(
+                                                  color: Colors
+                                                      .transparent, // Y left line
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                minimum: 0,
+                                                // maximum: 100,
+                                              ),
+                                              // primaryXAxis: CategoryAxis(
+                                              //   //Hide the gridlines of x-axis
+                                              //   majorGridLines:
+                                              //       MajorGridLines(width: 0),
+                                              //   //Hide the axis line of x-axis
+                                              //   axisLine: AxisLine(width: 0),
+                                              // ),
+                                              //
+                                              // primaryYAxis: CategoryAxis(
+                                              //     //Hide the gridlines of y-axis
+                                              //     majorGridLines:
+                                              //         MajorGridLines(width: 0),
+                                              //     //Hide the axis line of y-axis
+                                              //     axisLine: AxisLine(width: 0)),
+                                              backgroundColor:
+                                                  const Color(0xff1d2429),
+
+                                              series: <CartesianSeries>[
+                                                ColumnSeries<Product, String>(
+                                                  dataSource: [
+                                                    Product('Product A', 500),
+                                                    Product('Product B', 200),
+                                                    Product('Product C', 900),
+                                                    Product('Product D', 400),
+                                                    Product('Product E', 900),
+                                                    Product('Product F', 300),
+                                                    Product('Product G', 500),
+                                                  ],
+                                                  xValueMapper:
+                                                      (Product sales, _) =>
+                                                          sales.productName,
+                                                  yValueMapper:
+                                                      (Product sales, _) =>
+                                                          sales.sales,
+                                                  color: Colors.green,
+                                                )
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      const Icon(Icons.person)
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Card(
+                                          margin: EdgeInsets.zero,
+                                          color: const Color(0xff1d2429),
+                                          clipBehavior: Clip.antiAlias,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: const BorderSide(
+                                              color: Colors.white24,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SfCartesianChart(
+                                              // primaryXAxis: const CategoryAxis(),
+                                              plotAreaBorderWidth: 0,
+                                              // X top line
+                                              plotAreaBorderColor:
+                                                  Colors.white24,
+
+                                              primaryXAxis: const CategoryAxis(
+                                                // labelStyle: TextStyle(
+                                                //     color: Colors.white,
+                                                //     fontSize: 0),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks below X line
+                                                majorGridLines: MajorGridLines(
+                                                  width: 0.5,
+                                                  color: Colors.transparent,
+                                                ),
+                                                axisLine: AxisLine(
+                                                  // X bottom line
+                                                  color: Colors.white24,
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                              ),
+                                              primaryYAxis: const CategoryAxis(
+                                                majorGridLines: MajorGridLines(
+                                                    width: 1,
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5]),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks on left side
+                                                axisLine: AxisLine(
+                                                  color: Colors
+                                                      .transparent, // Y left line
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                minimum: 0,
+                                                // maximum: 100,
+                                              ),
+                                              // primaryXAxis: CategoryAxis(
+                                              //   //Hide the gridlines of x-axis
+                                              //   majorGridLines:
+                                              //       MajorGridLines(width: 0),
+                                              //   //Hide the axis line of x-axis
+                                              //   axisLine: AxisLine(width: 0),
+                                              // ),
+                                              //
+                                              // primaryYAxis: CategoryAxis(
+                                              //     //Hide the gridlines of y-axis
+                                              //     majorGridLines:
+                                              //         MajorGridLines(width: 0),
+                                              //     //Hide the axis line of y-axis
+                                              //     axisLine: AxisLine(width: 0)),
+                                              backgroundColor:
+                                                  const Color(0xff1d2429),
+                                              series: <CartesianSeries>[
+                                                ColumnSeries<Product, String>(
+                                                  dataSource: [
+                                                    Product('A', 500),
+                                                    Product('B', 200),
+                                                    Product('C', 900),
+                                                    Product('D', 400),
+                                                    Product('E', 900),
+                                                    Product('F', 300),
+                                                    Product('G', 700),
+                                                    Product('H', 400),
+                                                    Product('I', 600),
+                                                    Product('J', 900),
+                                                    Product('K', 300),
+                                                  ],
+                                                  xValueMapper:
+                                                      (Product sales, _) =>
+                                                          sales.productName,
+                                                  yValueMapper:
+                                                      (Product sales, _) =>
+                                                          sales.sales,
+                                                  color: Colors.green,
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  // color: Theme.of(context).colorScheme.primary,
-                                  clipBehavior: Clip.antiAlias,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                                const Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      12, 12, 12, 12),
+                                  child: Text(
+                                    "Top Trends Products",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                    ),
                                   ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      12, 12, 12, 12),
                                   child: Row(
                                     children: [
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        margin: const EdgeInsets.all(12),
-                                        height: 70,
-                                        child: const Text(
-                                          "This is a text widget.",
-                                          // style: Theme.of(context).textTheme.bodyText1,
+                                      Expanded(
+                                        child: Card(
+                                          margin: EdgeInsets.zero,
+                                          color: const Color(0xff1d2429),
+                                          clipBehavior: Clip.antiAlias,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: const BorderSide(
+                                              color: Colors.white24,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SfCartesianChart(
+                                              plotAreaBorderWidth: 0,
+                                              trackballBehavior:
+                                                  _trackballBehavior,
+                                              palette: const <Color>[
+                                                Colors.purple
+                                              ],
+                                              onTrackballPositionChanging:
+                                                  (TrackballArgs args) {},
+                                              primaryYAxis: const NumericAxis(
+                                                interval: 5,
+                                                edgeLabelPlacement:
+                                                    EdgeLabelPlacement.hide,
+                                                isVisible: false,
+                                                majorGridLines:
+                                                    MajorGridLines(width: 0),
+                                                rangePadding:
+                                                    ChartRangePadding.auto,
+                                              ),
+                                              primaryXAxis: const CategoryAxis(
+                                                axisLine: AxisLine(
+                                                    width: 1,
+                                                    color: Colors.purple),
+                                                majorTickLines:
+                                                    MajorTickLines(size: 0),
+                                                majorGridLines: MajorGridLines(
+                                                  width: 1,
+                                                  color: Colors.white24,
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                rangePadding:
+                                                    ChartRangePadding.auto,
+                                                labelPlacement:
+                                                    LabelPlacement.onTicks,
+                                                // labelStyle: ,
+                                              ),
+                                              series: <CartesianSeries>[
+                                                LineSeries<ChartData, String>(
+                                                  dataSource: chartData,
+                                                  animationDuration: 0,
+                                                  // splineType:
+                                                  //     SplineType.cardinal,
+                                                  // cardinalSplineTension: 0.9,
+                                                  xValueMapper:
+                                                      (ChartData data, _) =>
+                                                          data.x.toString(),
+                                                  yValueMapper:
+                                                      (ChartData data, _) =>
+                                                          data.y,
+                                                ),
+                                                // AreaSeries(
+                                                //     dataSource: chartData,
+                                                //     xValueMapper: (SalesData sales, _) => sales.year,
+                                                //     yValueMapper: (SalesData sales, _) => sales.sales,
+                                                //     gradient: gradientColors
+                                                // )
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                      const Icon(Icons.person)
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Card(
+                                          margin: EdgeInsets.zero,
+                                          color: const Color(0xff1d2429),
+                                          clipBehavior: Clip.antiAlias,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: const BorderSide(
+                                              color: Colors.white24,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SfCartesianChart(
+                                              plotAreaBorderWidth: 0,
+                                              // X top line
+                                              plotAreaBorderColor:
+                                                  Colors.white24,
+
+                                              primaryXAxis: const CategoryAxis(
+                                                // labelStyle: TextStyle(
+                                                //     color: Colors.white,
+                                                //     fontSize: 0),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks below X line
+                                                majorGridLines: MajorGridLines(
+                                                  width: 0.5,
+                                                  color: Colors.transparent,
+                                                ),
+                                                axisLine: AxisLine(
+                                                  // X bottom line
+                                                  color: Colors.white24,
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                minimum: 0,
+                                              ),
+                                              primaryYAxis: const CategoryAxis(
+                                                majorGridLines: MajorGridLines(
+                                                    width: 1,
+                                                    color: Colors.white24,
+                                                    dashArray: <double>[5, 5]),
+                                                majorTickLines: MajorTickLines(
+                                                    width:
+                                                        0), // Little sticks on left side
+                                                axisLine: AxisLine(
+                                                  color: Colors
+                                                      .transparent, // Y left line
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                minimum: 0,
+                                                // maximum: 100,
+                                              ),
+                                              series: <CartesianSeries>[
+                                                SplineAreaSeries<ChartData,
+                                                    double>(
+                                                  dataSource: chartData,
+                                                  splineType:
+                                                      SplineType.cardinal,
+                                                  xValueMapper:
+                                                      (ChartData data, _) =>
+                                                          data.x,
+                                                  yValueMapper:
+                                                      (ChartData data, _) =>
+                                                          data.y,
+                                                  borderWidth: 4,
+                                                  borderColor: Colors.green,
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      Colors.green[200]!,
+                                                      const Color(0xff1d2429),
+                                                    ],
+                                                    begin: Alignment.topCenter,
+                                                    end: Alignment.bottomCenter,
+                                                  ),
+                                                )
+                                                // SplineSeries<ChartData, String>(
+                                                //     dataSource: chartData,
+                                                //     animationDuration: 0,
+                                                //     splineType:
+                                                //         SplineType.cardinal,
+                                                //     cardinalSplineTension: 0.9,
+                                                //     xValueMapper:
+                                                //         (ChartData data, _) =>
+                                                //             data.x,
+                                                //     yValueMapper:
+                                                //         (ChartData data, _) =>
+                                                //             data.y)
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Expanded(
+                                        child: Card(
+                                          margin: EdgeInsets.zero,
+                                          color: const Color(0xff1d2429),
+                                          clipBehavior: Clip.antiAlias,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            side: const BorderSide(
+                                              color: Colors.white24,
+                                            ),
+                                          ),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: SfCartesianChart(
+                                              plotAreaBorderWidth: 0,
+                                              trackballBehavior:
+                                                  _trackballBehavior,
+                                              palette: const <Color>[
+                                                Colors.purple
+                                              ],
+                                              onTrackballPositionChanging:
+                                                  (TrackballArgs args) {},
+                                              primaryYAxis: const NumericAxis(
+                                                interval: 5,
+                                                edgeLabelPlacement:
+                                                    EdgeLabelPlacement.hide,
+                                                isVisible: false,
+                                                majorGridLines:
+                                                    MajorGridLines(width: 0),
+                                                rangePadding:
+                                                    ChartRangePadding.auto,
+                                              ),
+                                              primaryXAxis: const CategoryAxis(
+                                                axisLine: AxisLine(
+                                                    width: 1,
+                                                    color: Colors.purple),
+                                                majorTickLines:
+                                                    MajorTickLines(size: 0),
+                                                majorGridLines: MajorGridLines(
+                                                  width: 1,
+                                                  color: Colors.white24,
+                                                  dashArray: <double>[5, 5],
+                                                ),
+                                                rangePadding:
+                                                    ChartRangePadding.auto,
+                                                labelPlacement:
+                                                    LabelPlacement.onTicks,
+                                                // labelStyle: ,
+                                              ),
+                                              series: <CartesianSeries>[
+                                                SplineSeries<ChartData, String>(
+                                                    dataSource: chartData,
+                                                    color: Colors.red,
+                                                    animationDuration: 0,
+                                                    splineType:
+                                                        SplineType.natural,
+                                                    cardinalSplineTension: 0.9,
+                                                    xValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.x.toString(),
+                                                    yValueMapper:
+                                                        (ChartData data, _) =>
+                                                            data.y)
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  // color: Theme.of(context).colorScheme.primary,
-                                  clipBehavior: Clip.antiAlias,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        margin: const EdgeInsets.all(12),
-                                        height: 70,
-                                        child: const Text(
-                                          "This is a text widget.",
-                                          // style: Theme.of(context).textTheme.bodyText1,
-                                        ),
-                                      ),
-                                      const Icon(Icons.person)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Card(
-                                  margin: EdgeInsets.zero,
-                                  // color: Theme.of(context).colorScheme.primary,
-                                  clipBehavior: Clip.antiAlias,
-                                  elevation: 0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        alignment: Alignment.bottomLeft,
-                                        margin: const EdgeInsets.all(12),
-                                        height: 70,
-                                        child: const Text(
-                                          "This is a text widget.",
-                                          // style: Theme.of(context).textTheme.bodyText1,
-                                        ),
-                                      ),
-                                      const Icon(Icons.person)
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
                     const Center(
                       child: Text("It's rainy here"),
                     ),
@@ -811,6 +1589,22 @@ class _MainViewState extends State<MainView> {
                       child: Text("It's sunny here"),
                     ),
                   ],
+                ),
+                floatingActionButton: FloatingActionButton.extended(
+                  onPressed: () {
+                    /// TODO
+                    // Simulate loading for 2 seconds
+                    setState(() {
+                      isLoading = true;
+                    });
+                    Future.delayed(const Duration(seconds: 2), () {
+                      setState(() {
+                        isLoading = false;
+                      });
+                    });
+                  },
+                  label: const Text("Add"),
+                  icon: const Icon(Icons.add),
                 ),
               ),
             ),
@@ -1171,4 +1965,18 @@ class TabInfo {
   final WidgetBuilder builder;
   final String label;
   final String description;
+}
+
+class Product {
+  final String productName;
+  final double sales;
+
+  Product(this.productName, this.sales);
+}
+
+class ChartData {
+  ChartData(this.x, this.y);
+
+  final double x;
+  final double? y;
 }

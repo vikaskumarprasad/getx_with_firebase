@@ -51,6 +51,9 @@ dependencies:
   neopop: ^1.0.2
   flutter_animate: ^4.5.0
   remixicon: ^1.1.0
+  fl_chart: ^0.66.2
+  syncfusion_flutter_charts: ^24.2.4+3
+  lottie: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -75,8 +78,12 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/
+    - assets/image/
+    - assets/image/loading.json
+  #    - assets/image/loading.json
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
